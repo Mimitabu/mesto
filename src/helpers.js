@@ -1,7 +1,3 @@
-import { myId, root, formNew, formInfo, formPhoto, deleteButtonElement, openFormButton, 
-    popUpForm, popUpCloseButton, popUpCloseEditButton, openEditButton,
-    popUpFormEdit, popUpFormPhoto, userName, userInfo, popUpEditSaveButton, 
-    addButton, popupImage, placesList, userPhoto, owner } from "./const.js"
 
 
 function addButtonActive () {
@@ -15,36 +11,7 @@ function addButtonDisabled () {
   addButton.classList.add('popup__button_disabled')
 }
 
-function openForm (event) {
-  document.querySelector('.error-name').textContent = ''
-  document.querySelector('.error-link').textContent = ''
-  addButtonDisabled()
-  new Popup('.popup_card')
-}
 
-function openFormEdit (event) {
-  const user = formInfo.elements.user 
-  const about = formInfo.elements.about
-  document.querySelector('.error-user').textContent = ''
-  document.querySelector('.error-about').textContent = ''
-  user.value = userName.textContent 
-  about.value = userInfo.textContent
-  new Popup('.popup_edit')
-}
-
-function openFormPhoto (event) {
-  document.querySelector('.error-photo').textContent = ''
-  new Popup('.popup_photo')
-}
-
-function addImg (event) {
-  if (event.target.classList.contains('place-card__image')) {
-    const image = event.target.style.backgroundImage
-    const imgString = image.slice(5, length - 2)
-    popupImage.setAttribute('src', imgString)
-    new Popup('.popup_img')
-  }
-}
 
 function closeForm () {
   popUpForm.classList.remove('popup_is-opened')
@@ -217,9 +184,4 @@ function newPhoto (event) {
 }
 
 
-export { newPhoto, newInfo, newCard, renderLoadingPhoto, renderLoadingCard, 
-        renderLoadingInfo, handleValidateInfo, handleValidatePhoto, 
-        handleValidateCard, isValidLink, isValidLenght, closeCard, closePhoto,
-        closeEdit, closeForm, addImg, openFormPhoto, openFormEdit, openForm, 
-        addButtonDisabled, addButtonActive }
 
