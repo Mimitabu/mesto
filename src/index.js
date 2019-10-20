@@ -4,6 +4,7 @@ const serverUrl = NODE_ENV === 'development' ? 'http://praktikum.tk/cohort3' : '
 import { myId, root, formNew, formInfo, formPhoto, deleteButtonElement, openFormButton, 
 		popUpForm, popUpCloseButton, popUpCloseEditButton, openEditButton,
 		popUpFormEdit, popUpFormPhoto, userName, userInfo, popUpEditSaveButton, 
+    popUpPhotoSaveButton,
 		addButton, popupImage, placesList, userPhoto, owner } from "./const.js"
 
 
@@ -217,7 +218,8 @@ function newCard (event) {
   renderLoadingCard(true)
   api.postCard(formNew.elements.name.value, formNew.elements.link.value)
     .then((data) => {
-      cardList.addCard(formNew.elements.link.value, formNew.elements.name.value, true)
+      cardList.addCard(formNew.elements.link.value, formNew.elements.name.value, true, data._id)
+      console.log(data._id)
       formNew.reset()
       addButtonDisabled()
       closeForm()

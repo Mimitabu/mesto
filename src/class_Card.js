@@ -13,7 +13,7 @@ const api = new Api(
 
 
 export class Card {
-  constructor (link, name, trash, cardId, likes) {
+  constructor (link, name, trash, cardId, likes = []) {
     this.remove = this.remove.bind(this)
     this.like = this.like.bind(this)
     this.name = name
@@ -21,6 +21,7 @@ export class Card {
     this.trash = trash
     this.cardId = cardId
     this.likes = likes
+    this.likeCounter = this.likes.length
     this.wasLikedPreviously = !!(likes.find(like => like._id === myId))
     this.cardElement = this.createCard(link, name)
     this.likeButton = this.cardElement
@@ -72,14 +73,16 @@ export class Card {
     likeCards.appendChild(likeCountElement)
     likeCountElement.textContent = this.likes.length
     return placeCardElement
+    console.log(placeCardElement)
   }
 
   like (event) {
     if (!this.likeButton.classList.contains('place-card__like-icon_liked')) {
       api.likeCard(this.cardId,'PUT')
         .then(data => {
+          this.likeCounter += 1
           this.cardElement
-            .querySelector('.place-card__like-count').textContent = (this.likes.length)
+            .querySelector('.place-card__like-count').textContent = this.likeCounter 
           this.likeButton.classList.add('place-card__like-icon_liked')
         })
         .catch(err => {
@@ -88,8 +91,9 @@ export class Card {
     } else {
       api.likeCard(this.cardId,'DELETE')
         .then(data => {
+           this.likeCounter -= 1
           this.cardElement
-            .querySelector('.place-card__like-count').textContent = (this.likes.length)
+            .querySelector('.place-card__like-count').textContent =this.likeCounter
           this.likeButton.classList.remove('place-card__like-icon_liked')
         })
         .catch(err => {

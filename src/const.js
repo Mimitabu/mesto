@@ -29,4 +29,5 @@ const owner = {}
 export { myId, root, formNew, formInfo, formPhoto, deleteButtonElement, openFormButton, 
 		popUpForm, popUpCloseButton, popUpCloseEditButton, openEditButton,
 		popUpFormEdit, popUpFormPhoto, userName, userInfo, popUpEditSaveButton, 
+		popUpPhotoSaveButton,
 		addButton, popupImage, placesList, userPhoto, owner}
