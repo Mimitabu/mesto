@@ -1,6 +1,5 @@
 import { formInfo } from "./const.js"
 
-
 export class Api {
   constructor (baseUrl, headers) {
     this.baseUrl = baseUrl
