@@ -3,12 +3,11 @@ import { Api } from "./class_Api.js"
 import { serverUrl, api } from "./const.js"
 
 export class Card {
-  constructor (link, name, trash, cardId, likes = []) {
+  constructor (link, name, cardId, likes = [], currentUserId) {
     this.remove = this.remove.bind(this)
     this.like = this.like.bind(this)
     this.name = name
     this.link = link
-    this.trash = trash
     this.cardId = cardId
     this.likes = likes
     this.likeCounter = this.likes.length
@@ -29,7 +28,7 @@ export class Card {
     const placeCardElement = document.createElement('div')
     const cardImageElement = document.createElement('div')
 
-    if (this.trash) {
+    if (trash) {
       const deleteButtonElement = document.createElement('button')
       deleteButtonElement.classList.add('place-card__delete-icon')
       cardImageElement.appendChild(deleteButtonElement)

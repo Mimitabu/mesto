@@ -9,12 +9,8 @@ export class CardList {
 
   render () {
     this.initialCards.forEach(({ name, link, owner, _id, likes }) => {
-      if (this.amIOwner._id == owner._id) {
-        this.trash = true
-      } else {
-        this.trash = false
-      }
-      this.addCard(link, name, this.trash, _id, likes)
+      const trash = this.amIOwner._id == owner._id
+      this.addCard(link, name, trash, _id, likes)
     })
   }
 

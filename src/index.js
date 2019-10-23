@@ -219,7 +219,7 @@ function newCard (event) {
 function newInfo (event) {
   event.preventDefault()
   renderLoadingInfo(true)
-  api.patchUserInfo()
+  api.patchUserInfo(formInfo.elements.user.value, formInfo.elements.about.value)
     .then((data) => {
       userName.textContent = formInfo.elements.user.value
       userInfo.textContent = formInfo.elements.about.value

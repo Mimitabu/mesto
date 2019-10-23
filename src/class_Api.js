@@ -1,4 +1,3 @@
-import { formInfo } from "./const.js"
 
 export class Api {
   constructor (baseUrl, headers) {
@@ -18,13 +17,13 @@ export class Api {
       })
   }
 
-  patchUserInfo () {
+  patchUserInfo (name, about) {
     return fetch(`${this.baseUrl}/users/me`, {
       method: 'PATCH',
       headers: this.headers,
       body: JSON.stringify({
-        name: formInfo.elements.user.value,
-        about: formInfo.elements.about.value
+        name: name,
+        about: about
       })
     })
       .then(res => {
