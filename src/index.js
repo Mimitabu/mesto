@@ -1,11 +1,11 @@
 import "./pages/index.css";
-const serverUrl = NODE_ENV === 'development' ? 'http://praktikum.tk/cohort3' : 'https://praktikum.tk/cohort3'
-
-import { myId, root, formNew, formInfo, formPhoto, deleteButtonElement, openFormButton, 
+import { 
+		myId, root, formNew, formInfo, formPhoto, deleteButtonElement, openFormButton, 
 		popUpForm, popUpCloseButton, popUpCloseEditButton, openEditButton,
 		popUpFormEdit, popUpFormPhoto, userName, userInfo, popUpEditSaveButton, 
-    popUpPhotoSaveButton,
-		addButton, popupImage, placesList, userPhoto, owner } from "./const.js"
+    	popUpPhotoSaveButton,addButton, popupImage, placesList, userPhoto, owner, serverUrl, 
+    	api 
+    	} from "./const.js"
 
 
 import { Api } from "./class_Api.js"
@@ -13,17 +13,7 @@ import { Card } from "./class_Card.js"
 import { CardList } from "./class_CardList.js"
 import { Popup } from "./class_Popup.js"
 
-
-
 const cardList = new CardList(document.querySelector('.places-list'), [], owner)
-
-const api = new Api(
-  serverUrl,
-  {
-    authorization: '70f2226f-be57-4015-8706-b73d7a08cde1',
-    'Content-Type': 'application/json'
-  }
-)
 
 api.getInitialCards().then(data => {
   const cardList = new CardList(document.querySelector('.places-list'), data, owner)
@@ -83,8 +73,6 @@ function addImg (event) {
   }
 }
 
-
-
 function addButtonActive () {
   addButton.removeAttribute('disabled')
   addButton.classList.remove('popup__button_disabled')
@@ -95,8 +83,6 @@ function addButtonDisabled () {
   addButton.setAttribute('disabled', true)
   addButton.classList.add('popup__button_disabled')
 }
-
-
 
 function closeForm () {
   popUpForm.classList.remove('popup_is-opened')
@@ -211,8 +197,6 @@ function renderLoadingPhoto (isLoading) {
   }
 }
 
-
-
 function newCard (event) { 
   event.preventDefault()
   renderLoadingCard(true)
@@ -249,9 +233,6 @@ function newInfo (event) {
     })
 }
 
-
-
-
 function newPhoto (event) {
   event.preventDefault()
   renderLoadingPhoto(true)
@@ -268,11 +249,6 @@ function newPhoto (event) {
       renderLoadingPhoto(false)
     })
 }
-
-
-
-
-
 
 
 formNew.addEventListener('submit', newCard)
