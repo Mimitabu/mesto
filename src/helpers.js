@@ -1,88 +1,3 @@
-import "./pages/index.css";
-const serverUrl = NODE_ENV === 'development' ? 'http://praktikum.tk/cohort3' : 'https://praktikum.tk/cohort3'
-
-import { myId, root, formNew, formInfo, formPhoto, deleteButtonElement, openFormButton, 
-		popUpForm, popUpCloseButton, popUpCloseEditButton, openEditButton,
-		popUpFormEdit, popUpFormPhoto, userName, userInfo, popUpEditSaveButton, 
-    popUpPhotoSaveButton,
-		addButton, popupImage, placesList, userPhoto, owner } from "./const.js"
-
-
-import { Api } from "./class_Api.js"
-import { Card } from "./class_Card.js"
-import { CardList } from "./class_CardList.js"
-import { Popup } from "./class_Popup.js"
-
-
-
-const cardList = new CardList(document.querySelector('.places-list'), [], owner)
-
-const api = new Api(
-  serverUrl,
-  {
-    authorization: '70f2226f-be57-4015-8706-b73d7a08cde1',
-    'Content-Type': 'application/json'
-  }
-)
-
-api.getInitialCards().then(data => {
-  const cardList = new CardList(document.querySelector('.places-list'), data, owner)
-  cardList.render()
-  console.log(data)
-})
-
-api.getUserInfo()
-  .then(data => {
-    Object.assign(owner, data)
-    userName.textContent = data.name
-    userInfo.textContent = data.about
-  })
-  .catch(err => {
-    console.log(`Ошибка: ${err}`)
-  })
-
-  api.getUserPhoto()
-  .then(data => {
-    userPhoto.style.backgroundImage = `url(${data.avatar})`
-  })
-  .catch(err => {
-    console.log(`Ошибка: ${err}`)
-  })
-
-
-
-
-function openForm (event) {
-  document.querySelector('.error-name').textContent = ''
-  document.querySelector('.error-link').textContent = ''
-  addButtonDisabled()
-  new Popup('.popup_card')
-}
-
-function openFormEdit (event) {
-  const user = formInfo.elements.user 
-  const about = formInfo.elements.about
-  document.querySelector('.error-user').textContent = ''
-  document.querySelector('.error-about').textContent = ''
-  user.value = userName.textContent 
-  about.value = userInfo.textContent
-  new Popup('.popup_edit')
-}
-
-function openFormPhoto (event) {
-  document.querySelector('.error-photo').textContent = ''
-  new Popup('.popup_photo')
-}
-
-function addImg (event) {
-  if (event.target.classList.contains('place-card__image')) {
-    const image = event.target.style.backgroundImage
-    const imgString = image.slice(5, length - 2)
-    popupImage.setAttribute('src', imgString)
-    new Popup('.popup_img')
-  }
-}
-
 
 
 function addButtonActive () {
@@ -218,8 +133,7 @@ function newCard (event) {
   renderLoadingCard(true)
   api.postCard(formNew.elements.name.value, formNew.elements.link.value)
     .then((data) => {
-      cardList.addCard(formNew.elements.link.value, formNew.elements.name.value, true, data._id)
-      console.log(data._id)
+      cardList.addCard(formNew.elements.link.value, formNew.elements.name.value, true)
       formNew.reset()
       addButtonDisabled()
       closeForm()
@@ -235,7 +149,7 @@ function newCard (event) {
 function newInfo (event) {
   event.preventDefault()
   renderLoadingInfo(true)
-  api.patchUserInfo(formInfo.elements.user.value, formInfo.elements.about.value)
+  api.patchUserInfo()
     .then((data) => {
       userName.textContent = formInfo.elements.user.value
       userInfo.textContent = formInfo.elements.about.value
@@ -271,19 +185,3 @@ function newPhoto (event) {
 
 
 
-
-
-
-
-formNew.addEventListener('submit', newCard)
-openFormButton.addEventListener('click', openForm)
-popUpCloseButton.addEventListener('click', closeForm)
-openEditButton.addEventListener('click', openFormEdit)
-popUpCloseEditButton.addEventListener('click', closeEdit)
-formInfo.addEventListener('input', handleValidateInfo)
-formNew.addEventListener('input', handleValidateCard)
-formPhoto.addEventListener('input', handleValidatePhoto)
-formInfo.addEventListener('submit', newInfo)
-placesList.addEventListener('click', addImg)
-userPhoto.addEventListener('click', openFormPhoto)
-formPhoto.addEventListener('click', newPhoto)

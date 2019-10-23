@@ -1,6 +1,16 @@
-import { myId } from "./const.js"
-import { Api } from "./class_Api.js"
-import { serverUrl, api } from "./const.js"
+import {myId} from "./const.js"
+import {Api} from "./class_Api.js"
+
+
+const serverUrl = NODE_ENV === 'development' ? 'http://praktikum.tk/cohort3' : 'https://praktikum.tk/cohort3'
+const api = new Api(
+  serverUrl,
+  {
+    authorization: '70f2226f-be57-4015-8706-b73d7a08cde1',
+    'Content-Type': 'application/json'
+  }
+)
+
 
 export class Card {
   constructor (link, name, cardId, likes = [], currentUserId) {

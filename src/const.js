@@ -1,4 +1,3 @@
-import {Api} from "./class_Api.js"
 
 const myId = '9e63fcbef5bfd8892bbb773a'
 const root = document.querySelector('.root')
@@ -23,19 +22,12 @@ const placesList = root.querySelector('.places-list')
 const userPhoto = root.querySelector('.user-info__photo')
 const owner = {}
 
-const serverUrl = NODE_ENV === 'development' ? 'http://praktikum.tk/cohort3' : 'https://praktikum.tk/cohort3'
-const api = new Api(
-  serverUrl,
-  {
-    authorization: '70f2226f-be57-4015-8706-b73d7a08cde1',
-    'Content-Type': 'application/json'
-  }
-)
 
-export {
-		myId, root, formNew, formInfo, formPhoto, deleteButtonElement, openFormButton, 
+
+
+
+export { myId, root, formNew, formInfo, formPhoto, deleteButtonElement, openFormButton, 
 		popUpForm, popUpCloseButton, popUpCloseEditButton, openEditButton,
 		popUpFormEdit, popUpFormPhoto, userName, userInfo, popUpEditSaveButton, 
-		popUpPhotoSaveButton, addButton, popupImage, placesList, userPhoto, owner, 
-		serverUrl, api
-		}
+		popUpPhotoSaveButton,
+		addButton, popupImage, placesList, userPhoto, owner}
