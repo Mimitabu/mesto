@@ -16,7 +16,3 @@
 @import url(../blocks/popup/__close/_img/popup__close_img.css);
 @import url(../blocks/error-message/error-message.css);
 @import url(../blocks/popup/__button/_photo/popup__button_photo.css);
-body {
-  background-color: #000;
-}
--
