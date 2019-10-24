@@ -31,4 +31,3 @@ HTML/CSS(flexbox)/BEM/Javascript(ES5/ES6)
 4. Команда соберет продакшн версию:
 
     npm run build
-
